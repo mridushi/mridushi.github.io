@@ -124,17 +124,18 @@ let data = {
 
 
 class App extends Component {
+  handleChange(e){
+    console.log(e.target.value);
+  }
+
   render() {
     let Results = data.data.map(page => <li><p>{page.name}</p><p>{page.id}</p></li>)
     return (
       <div className="App">
-      <form>
         <label>
           Search:
-          <input type="text" name="name" />
+          <input type="text" name="name" placeholder="Search for a Page" onChange={this.handleChange}/>
         </label>
-        <input type="submit" value="Submit" />
-      </form>
         <ul>{Results}</ul>
       </div>
     );
