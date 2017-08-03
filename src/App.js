@@ -37,7 +37,7 @@ class App extends Component {
     let Results = this.state.data
                   .map((page, index) => (
                     <li key={index}>
-                      <Product name={page.name} id={page.id} />
+                      <Product key={index} name={page.name} id={page.id} />
                     </li>
                   ));
 
