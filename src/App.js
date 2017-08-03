@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import agent from 'superagent';
+import Product from './Product.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -33,7 +34,13 @@ class App extends Component {
   }
 
   render() {
-    let Results = this.state.data.map((page, index) => <li key={index}><p>{page.name}</p><p>{page.id}</p></li>)
+    let Results = this.state.data
+                  .map((page, index) => (
+                    <li key={index}>
+                      <Product name={page.name} id={page.id} />
+                    </li>
+                  ));
+
     return (
       <div className="App">
         <label>
