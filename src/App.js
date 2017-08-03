@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import agent from 'superagent';
 import logo from './logo.svg';
 import './App.css';
 
@@ -124,12 +125,23 @@ let data = {
 
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: []
+    }
+  }
+
   handleChange(e){
-    console.log(e.target.value);
+    let query = e.target.value;
+    let api = `https://graph.facebook.com/search?q=${query}&type=page&access_token=459458757771772|864b6e907fd81f72ef3f74e9f7a9d6ae`;
+    console.log(api);
   }
 
   render() {
-    let Results = data.data.map(page => <li><p>{page.name}</p><p>{page.id}</p></li>)
+    let Results = this.state.data.map(page => <li><p>{page.name}</p><p>{page.id}</p></li>)
     return (
       <div className="App">
         <label>
