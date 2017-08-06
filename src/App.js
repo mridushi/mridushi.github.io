@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import agent from 'superagent';
 import Product from './Product.js';
+import Favourites from './Favourites.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -13,9 +14,25 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
+    this.addFav = this.addFav.bind(this);
+
     this.state = {
-      data: []
+      data: [],
+      favs: {
+      }
     }
+  }
+
+  addFav(product) {
+    let currentFavs = this.state.favs;
+    let key = product.id;
+    let value = product.name;
+
+    currentFavs[key] = value;
+    this.setState({
+      favs: currentFavs
+    });
+
   }
 
   handleChange(e){
@@ -37,12 +54,13 @@ class App extends Component {
     let Results = this.state.data
                   .map((page, index) => (
                     <li key={index}>
-                      <Product key={page.id} name={page.name} id={page.id} />
+                      <Product key={page.id} name={page.name} id={page.id} addFav={this.addFav}/>
                     </li>
                   ));
 
     return (
       <div className="App">
+        <Favourites favs={this.state.favs}/>
         <label>
           Search:
           <input type="text" name="name" placeholder="Search for a Page" onChange={this.handleChange}/>

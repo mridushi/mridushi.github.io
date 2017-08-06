@@ -11,6 +11,14 @@ export default class App extends Component {
       description: ''
     }
     this.handleClick = this.handleClick.bind(this);
+    this.handleAddFav = this.handleAddFav.bind(this);
+  }
+
+  handleAddFav() {
+    this.props.addFav({
+      id: this.props.id,
+      name: this.props.name
+    });
   }
 
   handleClick() {
@@ -33,6 +41,7 @@ export default class App extends Component {
       <div>
         <p>{this.props.name}</p><p>{this.props.id}</p>
         <button onClick={this.handleClick}>Details</button>
+        <button onClick={this.handleAddFav}>Fav</button>
         <p>{this.state.category}</p>
         <p>{this.state.description}</p>
         <img src={this.state.image}/>
