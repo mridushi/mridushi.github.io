@@ -13,14 +13,6 @@ export default class App extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  componentWillReceiveProps() {
-    this.setState({
-      category: '',
-      image: '',
-      description: ''
-    });
-  }
-
   handleClick() {
     let api = `https://graph.facebook.com/${this.props.id}?fields=category,description,cover&access_token=459458757771772|864b6e907fd81f72ef3f74e9f7a9d6ae`;
 
