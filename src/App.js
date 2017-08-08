@@ -68,10 +68,10 @@ class App extends Component {
       <div className="App">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-12 search-header">
               <label>
-                Search:
                 <input
+                  className="form-control search-input"
                   type="text"
                   name="name"
                   placeholder="Search for a Page"
@@ -80,13 +80,13 @@ class App extends Component {
               </label>
             </div>
           </div>
-          <div className="row">
-            <div className="col-md-6">
+          <div className="row results">
+            <div className="col-md-8">
               <ul>
                 {Results}
               </ul>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <Favourites favs={this.state.favs} />
             </div>
           </div>
