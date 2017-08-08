@@ -53,16 +53,26 @@ class App extends Component {
   }
 
   render() {
-    let Results = this.state.data.map((page, index) =>
-      <li key={index}>
-        <Product
-          key={page.id}
-          name={page.name}
-          id={page.id}
-          addRemoveFav={this.addRemoveFav}
-        />
-      </li>
-    );
+    let Results = this.state.data.map((page, index) => {
+
+      let isFav = false;
+      if (page.id in this.state.favs) {
+        isFav = true;
+      }
+
+      return (
+        <li key={index}>
+          <Product
+            isFav={isFav}
+            key={page.id}
+            name={page.name}
+            id={page.id}
+            addRemoveFav={this.addRemoveFav}
+          />
+        </li>
+      );
+
+    })
 
     return (
       <div className="App">
@@ -74,7 +84,7 @@ class App extends Component {
                   className="form-control search-input"
                   type="text"
                   name="name"
-                  placeholder="Search for a Page"
+                  placeholder="Search for a Facebook Page"
                   onChange={this.handleChange}
                 />
               </label>
