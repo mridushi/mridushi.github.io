@@ -40,11 +40,11 @@ export default class App extends Component {
     return(
       <div>
         <p>{this.props.name}</p><p>{this.props.id}</p>
-        <button onClick={this.handleClick}>Details</button>
-        <button onClick={this.handleFav}>Fav</button>
+        <button className="btn btn-primary" onClick={this.handleClick}>Details</button>
+        <button className="btn btn-default" onClick={this.handleFav}>Fav</button>
         <p>{this.state.category}</p>
         <p>{this.state.description}</p>
-        <img src={this.state.image}/>
+        <img className="img-thumbnail" src={this.state.image}/>
       </div>
     );
   }
