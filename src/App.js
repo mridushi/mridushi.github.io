@@ -14,21 +14,30 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.addFav = this.addFav.bind(this);
+    this.addRemoveFav = this.addRemoveFav.bind(this);
+
+
+    let favsFromStorage = JSON.parse(localStorage.getItem('favs')) || {};
 
     this.state = {
       data: [],
-      favs: {
-      }
+      favs: favsFromStorage
     }
   }
 
-  addFav(product) {
-    let currentFavs = this.state.favs;
+  addRemoveFav(product) {
+    let currentFavs = { ...this.state.favs };
     let key = product.id;
     let value = product.name;
 
-    currentFavs[key] = value;
+    if (key in currentFavs) {
+      delete currentFavs[key];
+    } else {
+      currentFavs[key] = value;
+    }
+
+    localStorage.setItem('favs', JSON.stringify(currentFavs));
+
     this.setState({
       favs: currentFavs
     });
@@ -54,7 +63,7 @@ class App extends Component {
     let Results = this.state.data
                   .map((page, index) => (
                     <li key={index}>
-                      <Product key={page.id} name={page.name} id={page.id} addFav={this.addFav}/>
+                      <Product key={page.id} name={page.name} id={page.id} addRemoveFav={this.addRemoveFav}/>
                     </li>
                   ));
 
