@@ -8,8 +8,13 @@
   width: 50%;
 }
 
-.results {
-  padding-top: 30px;
+.results .left-title{
+  margin-bottom: 20px;
+  padding-left: 40px;
+}
+
+.results .right-title{
+  margin-bottom: 20px;
 }
 
 .results ul {

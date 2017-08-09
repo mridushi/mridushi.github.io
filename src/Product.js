@@ -11,11 +11,11 @@ export default class App extends Component {
       description: "",
       show: false
     };
-    this.handleClick = this.handleClick.bind(this);
-    this.handleFav = this.handleFav.bind(this);
+    this.showHideDetails = this.showHideDetails.bind(this);
+    this.handleAddRemoveFav = this.handleAddRemoveFav.bind(this);
   }
 
-  handleFav() {
+  handleAddRemoveFav() {
     this.props.addRemoveFav({
       id: this.props.id,
       name: this.props.name
@@ -28,7 +28,6 @@ export default class App extends Component {
 
     agent.get(api).end((err, res) => {
       let response = res.body || [];
-
       this.setState({
         category: response.category || "",
         image: (response.cover && response.cover.source) || "",
@@ -37,7 +36,7 @@ export default class App extends Component {
     });
   }
 
-  handleClick() {
+  showHideDetails() {
     if (this.state.show) {
       this.setState({ show: false });
     } else {
@@ -45,13 +44,15 @@ export default class App extends Component {
       this.setState({ show: true });
     }
   }
+
   render() {
     let Details = null;
     if (this.state.show) {
       Details = (
         <div>
           <h4>
-            {this.state.category} <span className="label label-default">category</span>
+            {this.state.category}{" "}
+            <span className="label label-default">category</span>
           </h4>
           <blockquote>
             {this.state.description}
@@ -77,11 +78,14 @@ export default class App extends Component {
             </h3>
           </div>
           <div className="panel-body">
-            <button className="btn btn-default" onClick={this.handleClick}>
+            <button className="btn btn-default" onClick={this.showHideDetails}>
               Details
             </button>
-            <button className="btn btn-default" onClick={this.handleFav}>
-            <span className={favClass} aria-hidden="true"></span>  Fav
+            <button
+              className="btn btn-default"
+              onClick={this.handleAddRemoveFav}
+            >
+              <span className={favClass} /> Fav
             </button>
             {Details}
           </div>
